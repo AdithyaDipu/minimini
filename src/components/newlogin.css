@@ -1,0 +1,30 @@
+input {
+    width: 600px; /* Adjust width as needed */
+    border-radius: 20px; /* Make the input box round */
+    
+  }
+  .flex {
+    display: flex;
+    align-items: center;
+  }
+  .input {
+    display: flex;
+    flex-direction: column;
+    space-y: 4;
+    padding-top: 100px; /* Add 100px padding from the top */
+  }
+
+  /* styles.css */
+.bg4 {
+    background-image: url('../assets/devpic.jpg');
+    /* Adjust background size and other properties as needed */
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* Optional: text color for better visibility */
+    font-size: 24px;
+    opacity: 0.8;
+  }

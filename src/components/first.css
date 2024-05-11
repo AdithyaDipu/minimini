@@ -1,0 +1,63 @@
+/* first.css */
+.first-page-container {
+  /* Set background image */
+  background-image: url('../assets/img1.jpg');
+
+  /* Set background size and position */
+  background-size: cover;
+  background-position: center;
+  
+
+  /* Set minimum height to cover the entire viewport */
+  min-height: 100vh;
+}
+
+.image-content-container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 50px;
+  
+}
+
+.image-content-item {
+  text-align: center;
+  animation: pop-up 1s ease forwards;
+}
+
+@keyframes pop-up {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.image-content-item img {
+  width: 500px;
+  height: auto;
+  border-radius: 8px;
+  margin: 50px;
+  border: solid black;
+}
+
+.image-content-item p {
+  padding-top: 30px;
+  color: black;
+  font-size: 20px;
+  
+}
+
+
+contact-popup {
+  position: absolute;
+  top: calc(100% + 10px); /* Position the pop-up below the "Contact" button */
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  z-index: 1000;
+  border-radius:10px;
+}

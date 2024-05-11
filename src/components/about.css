@@ -1,0 +1,80 @@
+/* about.css */
+.about-page-container {
+    /* Set background image */
+    background-image: url('../assets/about.jpg');
+  
+    /* Set background size and position */
+    background-size: cover;
+    background-position: center;
+  
+    /* Set minimum height to cover the entire viewport */
+    min-height: 100vh;
+}
+
+/* Style for the content container */
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+    /* Add animation to the content container */
+    animation: slideInContainer 1s ease forwards;
+}
+
+/* Style for the image */
+.about-image {
+    width: 500px; /* Set width of the image */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 20px; /* Add margin to the right */
+    border-radius: 20px;
+
+    /* Add animation to the image */
+    animation: slideInImage 1s ease forwards;
+}
+
+/* Style for the text */
+.about-page-container p {
+    font-size: 22px; /* Set font size */
+    color: #333; /* Set text color */
+    line-height: 1.6; /* Set line height */
+    text-align: left;
+    font-weight: bolder;
+
+    /* Add animation to the text */
+    animation: slideInText 1s ease forwards;
+}
+
+/* Keyframes for slide-in animations */
+@keyframes slideInContainer {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInImage {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInText {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

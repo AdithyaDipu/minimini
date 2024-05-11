@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hell{
+    color: green;
+    margin-left: 10px;
+}

@@ -1,0 +1,53 @@
+.item-selector {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .item-list {
+    width: 45%;/* Adjust width as needed */
+  }
+  
+  .item-list h2
+   {
+    font-size:40px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .item-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .item-box button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .item-box button:hover {
+    background-color: #0056b3;
+  }
+
+  .bgg {
+    background-image: url('../assets/pg3bg.jpg');
+    /* Adjust background size and other properties as needed */
+    background-size: cover;
+    background-repeat: no-repeat;
+    height:100vh; /* Adjust height as needed */
+    display : flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* Optional: text color for better visibility */
+    font-size: 24px;
+    opacity: 0.8;
+}

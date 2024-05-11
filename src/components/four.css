@@ -1,0 +1,14 @@
+/* styles.css */
+.bg-image {
+    background-image: url('../assets/section3bg.jpg');
+    /* Adjust background size and other properties as needed */
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* Optional: text color for better visibility */
+    font-size: 24px;
+    opacity: 0.8;
+  }

@@ -1,0 +1,86 @@
+.App {
+    text-align: center;
+    margin-top: 50px;
+    color: white;
+  }
+  .crop-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .crop-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+    max-width: 200px;
+    height: 300px;
+    width: 200px;
+    background-size: cover;
+    background-position: center;
+    transition: box-shadow 0.3s, border-color 0.3s, transform 0.3s; /* Smooth transition for hover effects */
+    background-color: #fff;
+    position: relative; /* Needed for the hover effect */
+  }
+  
+  /* Define background images for each crop card */
+  .crop-card:nth-child(1) {
+    background-image: url('../assets/tomato-lot-1327838.jpg');
+  }
+  
+  .crop-card:nth-child(2) {
+    background-image: url('../assets/brinj.jpg');
+  }
+  
+  .crop-card:nth-child(3) {
+    background-image: url('../assets/ucarecdn.webp');
+  }
+  
+  .progress-bar-container {
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    height: 20px;
+    margin: 10px 0;
+  }
+  
+  .progress-bar {
+    background-color: #007bff;
+    border-radius: 4px;
+    height: 100%;
+  }
+  
+
+  /* Define color classes */
+  .tomato {
+    color: white;
+  }
+  
+  .brinjal {
+    color: white;
+  }
+  
+  .carrot {
+    color: white;
+  }
+  
+  /* Hover effect */
+  .crop-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-color: #007bff;
+    transform: translateY(-5px); /* Move card up slightly */
+  }
+
+  .ugm {
+    /* Set background image */
+    background-image: url('../assets/background.jpg');
+  
+    /* Set background size and position */
+    background-size: cover;
+    background-position: center;
+    
+  
+    /* Set minimum height to cover the entire viewport */
+    min-height: 100vh;
+  }

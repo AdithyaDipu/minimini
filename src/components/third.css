@@ -1,0 +1,42 @@
+/* third.css */
+.third-page-container {
+  /* Set background image */
+  background-image: url('../assets/thirdimg.jpg');
+
+  /* Set background size and position */
+  background-size: cover;
+  background-position: center;
+
+  /* Set minimum height to cover the entire viewport */
+  min-height: 100vh;
+}
+
+.next-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-container {
+  margin-top: 20px;
+}
+
+.button {
+  width: 300px;
+  height: 60px;
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bolder;
+  color: black;
+  border: solid black;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: grey;
+}
