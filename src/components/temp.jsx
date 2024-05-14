@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getFirestore, collection, query, where, getDocs, addDoc } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app'; // Import initializeApp function from Firebase
 import '../components/style.css'
+import Navbar from './navbar';
 
 
 const SearchByTemperature = ({ temperature }) => {
@@ -106,6 +107,8 @@ const SearchByTemperature = ({ temperature }) => {
  
 
     return (
+        <>
+        <Navbar></Navbar>
         <div className='bggg'>
         <div className="containerr">
             <h2>Crops Suitable for your current climate </h2>
@@ -145,6 +148,7 @@ const SearchByTemperature = ({ temperature }) => {
              <button className='bb' onClick={handleAddProject}>Add Project</button>
         </div>
         </div>
+        </>
     );
 };
 

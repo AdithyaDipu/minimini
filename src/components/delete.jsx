@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc, deleteDoc, doc, query, where, getDocs } from 'firebase/firestore';
 import '../components/delete.css'
+import Navbar from './navbar';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -68,6 +69,8 @@ function WeatherForm() {
   };
 
   return (
+    <>
+    <Navbar></Navbar>
     <div className='bug'>
     <div className="weather-form-container">
       <div className="form-section">
@@ -125,6 +128,7 @@ function WeatherForm() {
       </div>
     </div>
     </div>
+    </>
   );
 }
 

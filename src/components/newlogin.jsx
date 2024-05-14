@@ -1,85 +1,93 @@
 import React, { useState } from 'react';
-import '../components/newlogin.css'
-import Button from './button';
-import Navbar from './navbar';
-function Newlogin() {
-  const [inputs, setInputs] = useState({
-    input1: '',
-    input2: '',
-    input3: '',
-    input4: '',
-    input5: '',
-    input6: ''
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import icons from react-icons
+
+
+function SignUp() {
+  const navigate = useNavigate(); // Initialize useNavigate hook
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setInputs(prevState => ({
+    setFormData(prevState => ({
       ...prevState,
       [name]: value
     }));
   };
 
+  const handleSignUp = () => {
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, formData.email, formData.password)
+      .then((userCredential) => {
+        // User signed up successfully
+        const user = userCredential.user;
+        console.log('User signed up:', user);
+        // Redirect to login page after successful signup
+        navigate('/login');
+      })
+      .catch((error) => {
+        // Handle signup errors
+        const errorMessage = error.message;
+        console.error('Signup error:', errorMessage);
+      });
+  };
+
   return (
-    <>
-    <div><Navbar></Navbar>
-    <div className="input flex flex-col space-y-4 bg4">
-      <input
-        type="text"
-        name="input1"
-        value={inputs.input1}
-        onChange={handleChange}
-        className="px-4 py-2 bg-white text-black"
-        placeholder="First Name"
-        
-      />
-      <input
-        type="text"
-        name="input2"
-        value={inputs.input2}
-        onChange={handleChange}
-        className="px-4 py-2 bg-white text-black"
-        placeholder="Last Name"
-      />
-
-      <input
-        type="text"
-        name="input3"
-        value={inputs.input3}
-        onChange={handleChange}
-        className="px-4 py-2 bg-white text-black"
-        placeholder="User Name"
-      />
-      <input
-        type="text"
-        name="input4"
-        value={inputs.input4}
-        onChange={handleChange}
-        className="px-4 py-2 bg-white text-black"
-        placeholder="Mobile Number"
-      />
-      <input
-        type="text"
-        name="input5"
-        value={inputs.input5}
-        onChange={handleChange}
-        className="px-4 py-2 bg-white text-black"
-        placeholder="City"
-      />
-      <input
-        type="text"
-        name="input6"
-        value={inputs.input6}
-        onChange={handleChange}
-        className="px-4 py-2 bg-white text-black"
-        placeholder="Password"
-      />
-      <Button/>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
+        <h2 className="text-2xl font-bold mb-4 text-center text-black">Sign Up</h2>
+        <form>
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring-blue-500 text-base"
+              placeholder="Enter your email"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring-blue-500 text-base"
+                placeholder="Enter your password"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-0 flex items-center px-2 bg-transparent"
+              >
+                {showPassword ? <FaEyeSlash className="text-gray-400" /> : <FaEye className="text-gray-400" />}
+              </button>
+            </div>
+          </div>
+          <div className="flex justify-center">
+            <button
+              type="button"
+              onClick={handleSignUp}
+              className="bg-blue-500 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-blue-600"
+            >
+              Sign Up
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-    </div>
-    </>
   );
-
 }
 
-export default Newlogin;
+export default SignUp;
