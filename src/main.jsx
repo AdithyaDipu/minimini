@@ -7,6 +7,7 @@ import Four from './components/four.jsx'
 import Login from './components/login.jsx'
 import Create from '../src/components/create.jsx'
 import CropData from './components/cropdata.jsx'
+import LocationGetter from './components/LocationGetter.jsx'
 
 import {
   createBrowserRouter,
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
   },
   {
     path: "crt",
-    element: <div><Four/></div>,
+    element: <div><LocationGetter/></div>,
   },
   {
     path: "dev1",

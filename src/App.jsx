@@ -6,6 +6,8 @@ import Login from './components/login';
 import Four from './components/four';
 import Newlogin from './components/newlogin';
 import Create from './components/create.jsx'
+import LocationGetter from './components/LocationGetter.jsx';
+import Delete from './components/delete.jsx'
 
 
 
@@ -19,8 +21,8 @@ const App = () => {
     <div >
       
       
+    
      
-     <First/>
 
      
      
