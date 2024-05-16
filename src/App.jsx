@@ -8,10 +8,8 @@ import Newlogin from './components/newlogin';
 import Create from './components/create.jsx'
 import LocationGetter from './components/LocationGetter.jsx';
 import Delete from './components/delete.jsx'
-
-
-
 import { initializeApp } from "firebase/app";
+
 
 import '../src/App.css';
 import Third from './components/third';
@@ -35,8 +33,7 @@ const App = () => {
       
       
     
-     <First/>
-
+  <First/>
      
      
     </div>

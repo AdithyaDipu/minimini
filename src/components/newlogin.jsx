@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import icons from react-icons
-
+import { useNavigate } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 function SignUp() {
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,9 +20,23 @@ function SignUp() {
     }));
   };
 
+  const validateEmail = (email) => {
+    // Regular expression to validate email format
+    const re =  /^[a-zA-Z0-9._-]+@(gmail\.com|saintgits\.org)$/;
+    return re.test(String(email).toLowerCase());
+  };
+
   const handleSignUp = () => {
+    const { email, password } = formData;
+
+    // Validate email format
+    if (!validateEmail(email)) {
+      setError('Invalid email domain. Only gmail.com and saintgits.org are allowed.');
+      return;
+    }
+
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, formData.email, formData.password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // User signed up successfully
         const user = userCredential.user;
@@ -32,8 +46,8 @@ function SignUp() {
       })
       .catch((error) => {
         // Handle signup errors
-        const errorMessage = error.message;
-        console.error('Signup error:', errorMessage);
+        setError(error.message);
+        console.error('Signup error:', error.message);
       });
   };
 
@@ -41,6 +55,7 @@ function SignUp() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
         <h2 className="text-2xl font-bold mb-4 text-center text-black">Sign Up</h2>
+        {error && <div className="mb-4 text-red-500 text-center">{error}</div>}
         <form>
           <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>

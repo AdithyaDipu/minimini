@@ -3,9 +3,10 @@ import { getFirestore, collection, query, where, getDocs, addDoc } from 'firebas
 import { initializeApp } from 'firebase/app'; // Import initializeApp function from Firebase
 import '../components/style.css'
 import Navbar from './navbar';
-
+import useAuth from './useAuth';
 
 const SearchByTemperature = ({ temperature }) => {
+    const {  currentUser } = useAuth();
     const [matchingCrops, setMatchingCrops] = useState([]);
     const [error, setError] = useState(null);
     const [cart, setCart] = useState([]);
@@ -68,12 +69,13 @@ const SearchByTemperature = ({ temperature }) => {
             try {
                 const firestore = getFirestore();
                 // Assuming you have a way to retrieve the user's email address, let's say from a variable named 'userEmail'
-                const userEmail = 'example@example.com';
+                const userEmail = currentUser.email;
                 await addDoc(collection(firestore, 'proj'), {
                     pname: projectName,
                     userEmail: userEmail, // Store the user's email address along with the project name
                     place: availability,
-                    cname: cart
+                    cname: cart,
+                    
                 });
                 // Add all crops in the cart to a list named "adithya"
                 const adithyaCollectionRef = collection(firestore, 'adithya');

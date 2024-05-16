@@ -25,6 +25,7 @@ function WeatherForm() {
   const [minTemp, setMinTemp] = useState('');
   const [cityName, setCityName] = useState('');
   const [deleteCname, setDeleteCname] = useState(''); // New state for crop name to delete
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,6 +56,11 @@ function WeatherForm() {
       const q = query(collection(db, 'crops'), where("cname", "==", deleteCname));
       const querySnapshot = await getDocs(q);
 
+      if (querySnapshot.empty) {
+        setErrorMessage(`No crop named '${deleteCname}' found in the database.`);
+        return;
+      }
+
       // Delete each document that matches the query
       querySnapshot.forEach(async (docSnapshot) => {
         await deleteDoc(doc(db, 'crops', docSnapshot.id));
@@ -70,64 +76,65 @@ function WeatherForm() {
 
   return (
     <>
-    <Navbar></Navbar>
-    <div className='bug'>
-    <div className="weather-form-container">
-      <div className="form-section">
-        <h2>Add Crop Data</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>
-              Max Temperature:
-              <input
-                type="number"
-                value={maxTemp}
-                onChange={(e) => setMaxTemp(e.target.value)}
-              />
-            </label>
+      <Navbar></Navbar>
+      <div className='bug'>
+        <div className="weather-form-container">
+          <div className="form-section">
+            <h2>Add Crop Data</h2>
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label>
+                  Max Temperature:
+                  <input
+                    type="number"
+                    value={maxTemp}
+                    onChange={(e) => setMaxTemp(e.target.value)}
+                  />
+                </label>
+              </div>
+              <div>
+                <label>
+                  Min Temperature:
+                  <input
+                    type="number"
+                    value={minTemp}
+                    onChange={(e) => setMinTemp(e.target.value)}
+                  />
+                </label>
+              </div>
+              <div>
+                <label>
+                  Crop Name:
+                  <input
+                    type="text"
+                    value={cityName}
+                    onChange={(e) => setCityName(e.target.value)}
+                  />
+                </label>
+              </div>
+              <button className='bu' type="submit">Submit</button>
+            </form>
           </div>
-          <div>
-            <label>
-              Min Temperature:
-              <input
-                type="number"
-                value={minTemp}
-                onChange={(e) => setMinTemp(e.target.value)}
-              />
-            </label>
-          </div>
-          <div>
-            <label>
-              Crop Name:
-              <input
-                type="text"
-                value={cityName}
-                onChange={(e) => setCityName(e.target.value)}
-              />
-            </label>
-          </div>
-          <button  className='bu' type="submit">Submit</button>
-        </form>
-      </div>
 
-      <div className="form-section">
-        <h2>Delete Crop Data</h2>
-        <form onSubmit={handleDelete}>
-          <div>
-            <label>
-              Crop Name to Delete:
-              <input
-                type="text"
-                value={deleteCname}
-                onChange={(e) => setDeleteCname(e.target.value)}
-              />
-            </label>
+          <div className="form-section">
+            <h2>Delete Crop Data</h2>
+            <form onSubmit={handleDelete}>
+              <div>
+                <label>
+                  Crop Name to Delete:
+                  <input
+                    type="text"
+                    value={deleteCname}
+                    onChange={(e) => setDeleteCname(e.target.value)}
+                  />
+                </label>
+              </div>
+              {errorMessage && <p className="error-message">{errorMessage}</p>}
+              <button className='bu' type="submit">Delete</button>
+            </form>
           </div>
-          <button className='bu' type="submit">Delete</button>
-        </form>
+        </div>
       </div>
-    </div>
-    </div>
     </>
   );
 }

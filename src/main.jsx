@@ -14,6 +14,7 @@ import Logout from './components/logout.jsx'
 import { initializeApp } from "firebase/app";
 import { AuthProvider } from './components/AuthContext.jsx';
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyAvl2v1enygI1jplM_denVHnwZLA3omV40",
   authDomain: "minimini-9d35a.firebaseapp.com",
@@ -82,6 +83,7 @@ const router = createBrowserRouter([
     path: "logout",
     element: <div> <Logout/></div>,
   },
+  
   
   
 ]);
