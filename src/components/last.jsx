@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { collection, addDoc, getFirestore, query, where, getDocs } from '@firebase/firestore';
+import React, { useState, useEffect } from 'react';
+import { collection, query, where, getDocs } from '@firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
 
-
-// Your web app's Firebase configuration
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+
+// Import the functions you need from the SDKs you need
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,73 +23,52 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-const CropSearch = () => {
-  const [cropName, setCropName] = useState('');
-  const [cropDesc, setCropDesc] = useState('');
+const CropDescription = ({ cropNames }) => {
+  const [descriptions, setDescriptions] = useState([]);
+  const [error, setError] = useState('');
 
-  const handleInputChange = (e) => {
-    setCropName(e.target.value);
-  };
+  useEffect(() => {
+    const fetchDescriptions = async () => {
+      const db = getFirestore();
+      const cropsRef = collection(db, 'crops');
+      const descriptionsArray = [];
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+      try {
+        for (const cname of cropNames) {
+          const q = query(cropsRef, where('cname', '==', cname));
+          const querySnapshot = await getDocs(q);
+          if (!querySnapshot.empty) {
+            querySnapshot.forEach((doc) => {
+              descriptionsArray.push({ cname, desc: doc.data().desc });
+            });
+          } else {
+            descriptionsArray.push({ cname, desc: 'No description found for this crop.' });
+          }
+        }
+        setDescriptions(descriptionsArray);
+      } catch (error) {
+        console.error('Error getting documents: ', error);
+        setError('Error fetching crop descriptions.');
+      }
+    };
 
-    const db = getFirestore();
-
-    try {
-      // Add a document to the 'crops' collection with the entered crop name and description
-      await addDoc(collection(db, 'crops'), {
-        name: cropName,
-        desc: cropDesc
-      });
-      alert('Crop added successfully!');
-    } catch (error) {
-      console.error('Error adding document: ', error);
-    }
-  };
-
-  const handleSearch = async () => {
-    const db = getFirestore();
-
-    try {
-      // Query the 'crops' collection to find the crop with the entered name
-      const q = query(collection(db, 'crops'), where('name', '==', cropName));
-      const querySnapshot = await getDocs(q);
-
-      querySnapshot.forEach((doc) => {
-        setCropDesc(doc.data().desc);
-      });
-    } catch (error) {
-      console.error('Error searching for crop: ', error);
-    }
-  };
+    fetchDescriptions();
+  }, [cropNames]);
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Enter Crop Name:
-          <input type="text" value={cropName} onChange={handleInputChange} />
-        </label>
-        <label>
-          Enter Crop Description:
-          <input type="text" value={cropDesc} onChange={(e) => setCropDesc(e.target.value)} />
-        </label>
-        <button type="submit">Add Crop</button>
-      </form>
-      <button onClick={handleSearch}>Search Crop Description</button>
-      {cropDesc && (
-        <div>
-          <h2>Description:</h2>
-          <p>{cropDesc}</p>
+      {error && <p>{error}</p>}
+      {descriptions.map((crop, index) => (
+        <div key={index}>
+          <h2>{crop.cname}</h2>
+          <p>{crop.desc}</p>
         </div>
-      )}
+      ))}
     </div>
   );
 };
 
-export default CropSearch;
+export default CropDescription;
