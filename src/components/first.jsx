@@ -44,16 +44,17 @@ const First = () => {
           <div className="text-center mt-6">
             <button
               onClick={handleNavigate}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+              className="project-button"
             >
-              Projects
+              My Project
+              <span className="arrow-icon">→</span>
             </button>
           </div>
         )}
-        <div className="text-center mt-6">
+        <div className="floating-action-button">
           <a
             href="/feed"
-            className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+            className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
           >
             Feedback
           </a>
