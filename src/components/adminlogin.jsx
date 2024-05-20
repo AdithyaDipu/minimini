@@ -20,7 +20,7 @@ const AdminLogin = () => {
 
       if (isAdmin) {
         // Redirect to admin dashboard
-        navigate('/mid');
+        navigate('/disp');
       } else {
         // Redirect to regular user dashboard
         navigate('/dh');
@@ -35,7 +35,7 @@ const AdminLogin = () => {
   const checkAdminCredentials = (email, password) => {
     // Hardcoded admin credentials
     const adminEmail = 'mldhanush03@gmail.com';
-    const adminPassword = '123456';
+    const adminPassword = '1234567';
 
     // Check if the provided credentials match the admin credentials
     return email === adminEmail && password === adminPassword;

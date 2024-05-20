@@ -15,6 +15,7 @@ import { initializeApp } from "firebase/app";
 import { AuthProvider } from './components/AuthContext.jsx';
 
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyAvl2v1enygI1jplM_denVHnwZLA3omV40",
   authDomain: "minimini-9d35a.firebaseapp.com",
@@ -34,6 +35,11 @@ import {
 } from "react-router-dom"
 import Newlogin from './components/newlogin.jsx'
 import Third from './components/third.jsx'
+import UserProjects from './components/userproj.jsx'
+import ProjectDetails from './components/projectdetails.jsx'
+import CallMe from './components/callme.jsx'
+import Contact from './components/feedback.jsx'
+import DisplayDatabase from './components/update11.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -67,10 +73,7 @@ const router = createBrowserRouter([
     path: "dh",
     element: <div><Third/></div>,
   },
-  {
-    path: "mid",
-    element: <div> <Delete/></div>,
-  },
+
   {
     path: "neww",
     element: <div> <CropData/></div>,
@@ -83,6 +86,31 @@ const router = createBrowserRouter([
     path: "logout",
     element: <div> <Logout/></div>,
   },
+  {
+    path: "mid",
+    element: <div> <UserProjects/></div>,
+  },
+  {
+    path: "/projects/:projectId",
+    element: <div> <ProjectDetails/></div>,
+  },
+  {
+    path: "callme",
+    element: <div> <CallMe/></div>,
+  },
+  {
+    path: "disp",
+    element: <div> <Delete/></div>,
+  },
+  {
+    path: "feed",
+    element: <div> <Contact/></div>,
+  },
+  {
+    path: "Crop_det",
+    element: <div> <DisplayDatabase/></div>,
+  },
+
   
   
   

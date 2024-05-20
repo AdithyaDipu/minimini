@@ -52,7 +52,7 @@ function SignUp() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="bg7 min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
         <h2 className="text-2xl font-bold mb-4 text-center text-black">Sign Up</h2>
         {error && <div className="mb-4 text-red-500 text-center">{error}</div>}

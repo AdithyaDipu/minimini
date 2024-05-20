@@ -1,72 +1,81 @@
-import React, { useState, useEffect } from 'react';
-import { collection, query, where, getDocs } from '@firebase/firestore';
-import { getFirestore } from 'firebase/firestore';
-import Last from './last';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
+import './callme.css'
 
-const YourParentComponent = () => {
-  const [pname, setProjectName] = useState('');
-  const [cname, setCropNames] = useState([]);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    const fetchCropNames = async () => {
-      if (!pname) return;
-
-      const db = initializeFirebase();
-      const projRef = collection(db, 'proj');
-      const q = query(projRef, where('pname', '==', pname));
-
-      try {
-        const querySnapshot = await getDocs(q);
-        if (!querySnapshot.empty) {
-          const projectDoc = querySnapshot.docs[0];
-          setCropNames(projectDoc.data().proj);
-        } else {
-          setError('No project found with that name.');
-          setCropNames([]);
-        }
-      } catch (error) {
-        console.error('Error getting documents: ', error);
-        setError('Error fetching project data.');
-      }
-    };
-
-    fetchCropNames();
-  }, [pname]);
-
-  const handleInputChange = (e) => {
-    setProjectName(e.target.value);
-  };
-
-  const initializeFirebase = () => {
-    // Your Firebase config
-    const firebaseConfig = {
-        apiKey: "AIzaSyAvl2v1enygI1jplM_denVHnwZLA3omV40",
-        authDomain: "minimini-9d35a.firebaseapp.com",
-        databaseURL: "https://minimini-9d35a-default-rtdb.firebaseio.com",
-        projectId: "minimini-9d35a",
-        storageBucket: "minimini-9d35a.appspot.com",
-        messagingSenderId: "1072638438233",
-        appId: "1:1072638438233:web:cec47e175f4945abb17a48",
-        measurementId: "G-NV7ZSQ0Y5X"
-      };
-
-    const db = getFirestore();
-    return db;
-  };
-
-  return (
-    <div>
-      <h1>Crop Descriptions</h1>
-      <label>
-        Enter Project Name:
-        <input type="text" value={pname} onChange={handleInputChange} />
-      </label>
-      {error && <p>{error}</p>}
-      {cname && cname.length > 0 && <Last cname={cname} />}
-
-    </div>
-  );
+const firebaseConfig = {
+    apiKey: "AIzaSyAvl2v1enygI1jplM_denVHnwZLA3omV40",
+    authDomain: "minimini-9d35a.firebaseapp.com",
+    databaseURL: "https://minimini-9d35a-default-rtdb.firebaseio.com",
+    projectId: "minimini-9d35a",
+    storageBucket: "minimini-9d35a.appspot.com",
+    messagingSenderId: "1072638438233",
+    appId: "1:1072638438233:web:cec47e175f4945abb17a48",
+    measurementId: "G-NV7ZSQ0Y5X"
 };
 
-export default YourParentComponent;
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+const CallMe = () => {
+    const location = useLocation();
+    const { cropNames } = location.state || { cropNames: [] };
+    const [crops, setCrops] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        console.log("Received cropNames:", cropNames); // Debugging line
+        const fetchCrops = async () => {
+            const db = getFirestore(app);
+
+            if (!Array.isArray(cropNames) || cropNames.length === 0) {
+                setError('No crop names provided');
+                setLoading(false);
+                return;
+            }
+
+            const q = query(collection(db, 'crops'), where('cname', 'in', cropNames));
+
+            try {
+                const querySnapshot = await getDocs(q);
+                const cropData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                setCrops(cropData);
+            } catch (err) {
+                setError(err.message);
+            }
+            setLoading(false);
+        };
+
+        fetchCrops();
+    }, [cropNames]);
+
+    if (loading) {
+        return <p className="text-center text-lg text-gray-600">Loading crop details...</p>;
+    }
+
+    if (error) {
+        return <p className="text-center text-lg text-red-600">Error: {error}</p>;
+    }
+
+    return (
+        <div className="bg5 min-h-screen bg-gray-100 p-8">
+            <h1 className="text-2xl font-bold mb-4 text-center">Crop Descriptions</h1>
+            <ul className="space-y-4">
+                {crops.length > 0 ? (
+                    crops.map((crop, index) => (
+                        <li key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
+                            <h2 className="text-xl font-bold mb-2">{crop.cname || crop.error}</h2>
+                            {crop.desc && <p className="text-gray-700">{crop.desc}</p>}
+                        </li>
+                    ))
+                ) : (
+                    <p className="text-center text-lg text-gray-600">No crops listed.</p>
+                )}
+            </ul>
+        </div>
+    );
+};
+
+export default CallMe;

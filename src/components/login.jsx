@@ -1,30 +1,41 @@
 import React, { useState } from 'react';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import icons from react-icons
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import '../components/login.css';
 
 const Login = () => {
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
+  const [resetEmailSent, setResetEmailSent] = useState(false); // State for tracking email sent status
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const auth = getAuth();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      // User signed in successfully
       const user = auth.currentUser;
       console.log('User signed in:', user);
-      // Redirect to the third page after successful login
       navigate('/dh');
     } catch (error) {
-      // Handle login errors
       setError(error.message);
       console.error('Login error:', error.message);
+    }
+  };
+
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    const auth = getAuth();
+    try {
+      await sendPasswordResetEmail(auth, email);
+      setResetEmailSent(true); // Set state to indicate email sent
+      console.log('Password reset email sent');
+    } catch (error) {
+      setError(error.message);
+      console.error('Password reset error:', error.message);
     }
   };
 
@@ -68,8 +79,9 @@ const Login = () => {
             Sign In
           </button>
           {error && <p className="text-red-500 text-center">{error}</p>}
+          {resetEmailSent && <p className="text-green-500 text-center">Password reset email sent. Check your inbox.</p>} {/* Display email sent message */}
           <div className="text-center">
-            <a href="/" className="text-blue-500 hover:underline text-sm">Forgot Password?</a>
+            <button onClick={handleForgotPassword} className="text-blue-500 hover:underline text-sm focus:outline-none">Forgot Password?</button>
           </div>
         </form>
         <div className="mt-4 text-center">

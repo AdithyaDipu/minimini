@@ -11,10 +11,13 @@ import Delete from './components/delete.jsx'
 import { initializeApp } from "firebase/app";
 import Last from './components/last.jsx'
 import Callme from './components/callme.jsx'
-
+import Update from './components/update11.jsx'
+import Feed from './components/feedback.jsx'
 import '../src/App.css';
 import Third from './components/third';
 import CropData from './components/cropdata.jsx';
+import U from './components/update11.jsx'
+import UserProjects from './components/userproj.jsx';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAvl2v1enygI1jplM_denVHnwZLA3omV40",
@@ -33,8 +36,8 @@ const App = () => {
     <div >
       
       
-    
-  <Callme/>
+    <First/>
+  
      
      
     </div>
