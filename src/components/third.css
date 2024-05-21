@@ -1,5 +1,4 @@
-/* third.css */
-.third-page-container {
+.third-page-container-unique {
   /* Set background image */
   background-image: url('../assets/thirdimg.jpg');
 
@@ -9,34 +8,64 @@
 
   /* Set minimum height to cover the entire viewport */
   min-height: 100vh;
+
+  /* Add a semi-transparent overlay for better text visibility */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.next-page {
+.third-page-container-unique::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.next-page-unique {
+  position: relative;
+  z-index: 2;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  color: white;
 }
 
-.button-container {
+.button-container-unique {
   margin-top: 20px;
 }
 
-.button {
+.styled-button-unique {
   width: 300px;
   height: 60px;
   margin: 10px;
   padding: 10px 20px;
   font-size: 20px;
   font-weight: bolder;
-  color: black;
-  border: solid black;
+  color: white;
+  background: linear-gradient(90deg, rgba(0, 128, 255, 1) 0%, rgba(0, 204, 255, 1) 100%);
+  border: none;
   border-radius: 50px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.button:hover {
-  background-color: grey;
+.styled-button-unique:hover {
+  background: linear-gradient(90deg, rgba(0, 102, 204, 1) 0%, rgba(0, 179, 230, 1) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.styled-button-unique:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 128, 255, 0.4);
 }

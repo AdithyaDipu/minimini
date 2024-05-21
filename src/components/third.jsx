@@ -1,4 +1,3 @@
-// Third.jsx
 import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link component from react-router-dom
 import '../components/third.css';
@@ -8,20 +7,20 @@ const Third = () => {
   return (
     <div>
       <Navbar></Navbar>
-    <div className="third-page-container">
-      <div className="next-page">
-        <div className="button-container">
-          {/* Use Link to navigate to the desired page */}
-          <a  href='crt' >
-          <button className="button"  >CREATE PROJECT</button>
-          </a>
-          <br/>
-          <a href='mid'>
-          <button className="button"  >EXISTING PROJECT</button>
-          </a>
+      <div className="third-page-container-unique">
+        <div className="next-page-unique">
+          <div className="button-container-unique">
+            {/* Use Link to navigate to the desired page */}
+            <Link to='/crt'>
+              <button className="styled-button-unique">CREATE PROJECT</button>
+            </Link>
+            <br/>
+            <Link to='/mid'>
+              <button className="styled-button-unique">EXISTING PROJECT</button>
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };

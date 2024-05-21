@@ -69,7 +69,7 @@ const UserProjects = () => {
     }
 
     return (
-        <div className="bg6 min-h-screen bg-gray-100 p-8">
+        <div className="bg6 min-h-screen  p-8">
             <h1 className="text-2xl font-bold mb-4 text-center">My Projects</h1>
             {projects.length === 0 ? (
                 <p className="text-center text-lg text-gray-600">No projects found.</p>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import './newlogin.css'
 
 function SignUp() {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ function SignUp() {
     password: ''
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null);  
 
   const handleChange = (e) => {
     const { name, value } = e.target;

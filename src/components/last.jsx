@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { collection, query, where, getDocs } from '@firebase/firestore';
 import { getFirestore } from 'firebase/firestore';
-
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 

@@ -60,7 +60,7 @@ const CallMe = () => {
     }
 
     return (
-        <div className="bg5 min-h-screen bg-gray-100 p-8">
+        <div className="bg5 min-h-screen  p-8">
             <h1 className="text-2xl font-bold mb-4 text-center">Crop Descriptions</h1>
             <ul className="space-y-4">
                 {crops.length > 0 ? (
