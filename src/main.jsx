@@ -45,7 +45,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <div><App/></div>,
   },
-  {
+  { 
     path: "about",
     element: <div><About/></div>,
   },
@@ -107,7 +107,7 @@ const router = createBrowserRouter([
     element: <div> <Contact/></div>,
   },
   {
-    path: "Crop_det",
+    path: "disp/Crop_det",
     element: <div> <DisplayDatabase/></div>,
   },
 
