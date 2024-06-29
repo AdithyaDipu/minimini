@@ -1,0 +1,12 @@
+.bg6{
+    /* Set background image */
+     background-color:#abde7c;
+   
+     /* Set background size and position */
+     background-size: cover;
+     background-position: center;
+     
+   
+     /* Set minimum height to cover the entire viewport */
+     min-height: 100vh;
+   }

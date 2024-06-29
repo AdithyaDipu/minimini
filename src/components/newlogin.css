@@ -1,30 +1,53 @@
-input {
-    width: 600px; /* Adjust width as needed */
-    border-radius: 20px; /* Make the input box round */
-    
-  }
-  .flex {
-    display: flex;
-    align-items: center;
-  }
-  .input {
-    display: flex;
-    flex-direction: column;
-    space-y: 4;
-    padding-top: 100px; /* Add 100px padding from the top */
-  }
+.signin-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
 
-  /* styles.css */
-.bg4 {
-    background-image: url('../assets/devpic.jpg');
-    /* Adjust background size and other properties as needed */
+.signin-container h2 {
+  text-align: center;
+}
+
+.signin-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signin-container input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.signin-container button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.signin-container button:hover {
+  background-color: #0056b3;
+}
+
+.bg7{
+  
+    background-image: url('../src/assets/fimg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100vh; /* Adjust height as needed */
-    display: flex;
+    height:100vh; 
+    display : flex;
     justify-content: center;
     align-items: center;
-    color: white; /* Optional: text color for better visibility */
+    color: white; 
     font-size: 24px;
-    opacity: 0.8;
-  }
+  
+}

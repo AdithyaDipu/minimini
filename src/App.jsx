@@ -6,22 +6,38 @@ import Login from './components/login';
 import Four from './components/four';
 import Newlogin from './components/newlogin';
 import Create from './components/create.jsx'
-
-
-
-
+import LocationGetter from './components/LocationGetter.jsx';
+import Delete from './components/delete.jsx'
+import { initializeApp } from "firebase/app";
+import Last from './components/last.jsx'
+import Callme from './components/callme.jsx'
+import Update from './components/update11.jsx'
+import Feed from './components/feedback.jsx'
 import '../src/App.css';
 import Third from './components/third';
 import CropData from './components/cropdata.jsx';
+import U from './components/update11.jsx'
+import UserProjects from './components/userproj.jsx';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAvl2v1enygI1jplM_denVHnwZLA3omV40",
+  authDomain: "minimini-9d35a.firebaseapp.com",
+  databaseURL: "https://minimini-9d35a-default-rtdb.firebaseio.com",
+  projectId: "minimini-9d35a",
+  storageBucket: "minimini-9d35a.appspot.com",
+  messagingSenderId: "1072638438233",
+  appId: "1:1072638438233:web:cec47e175f4945abb17a48",
+  measurementId: "G-NV7ZSQ0Y5X"
+};
+const dapp = initializeApp(firebaseConfig);
 
 const App = () => {
   return (
     <div >
       
       
-     
-     <First/>
-
+    <First/>
+  
      
      
     </div>
