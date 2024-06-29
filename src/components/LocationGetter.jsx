@@ -20,10 +20,12 @@ const LocationGetter = () => {
                     setLocation({
                         latitude: position.coords.latitude,
                         longitude: position.coords.longitude
+                        
                     });
                     // Store latitude and longitude values
                     setLatitude(position.coords.latitude);
                     setLongitude(position.coords.longitude);
+                    console.log(latitude);
                 },
                 (error) => {
                     setError('Error getting location: ' + error.message);
