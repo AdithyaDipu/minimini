@@ -41,7 +41,7 @@ function WeatherForm() {
         desc: desc // Add desc field
       });
 
-      console.log("Data successfully written to Firestore!");
+      alert("Data successfully written to Firestore!");
       // Clear input fields after successful submission
       setMaxTemp('');
       setMinTemp('');

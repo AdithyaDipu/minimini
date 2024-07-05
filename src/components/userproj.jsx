@@ -4,6 +4,7 @@ import { getFirestore, collection, query, where, getDocs } from 'firebase/firest
 import { useNavigate } from 'react-router-dom';
 import useAuth from './useAuth';
 import './userproj.css'
+import Navbar from './navbar';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAvl2v1enygI1jplM_denVHnwZLA3omV40",
@@ -68,9 +69,11 @@ const UserProjects = () => {
         return <p className="text-center text-lg text-red-600">Error: {error}</p>;
     }
 
-    return (
+    return (<>
+    <Navbar></Navbar>
+        
         <div className="bg6 min-h-screen  p-8">
-            <h1 className="text-2xl font-bold mb-4 text-center">My Projects</h1>
+            <h1 className="text-2xl font-bold mb-4 text-center text-white">My Projects</h1>
             {projects.length === 0 ? (
                 <p className="text-center text-lg text-gray-600">No projects found.</p>
             ) : (
@@ -88,6 +91,7 @@ const UserProjects = () => {
                 </div>
             )}
         </div>
+        </>
     );
 };
 

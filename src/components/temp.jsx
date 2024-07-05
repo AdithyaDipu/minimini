@@ -112,7 +112,7 @@ const SearchByTemperature = ({ temperature }) => {
                     <div className="availability-select">
                         <label htmlFor="availability">Availability of space:</label>
                         <select id="availability" onChange={(e) => setAvailability(e.target.value)}>
-                            <option value="min">Min</option>
+                            <option value="min">Min [gfhfhd]   </option>
                             <option value="medium">Medium</option>
                             <option value="max">Max</option>
                         </select>

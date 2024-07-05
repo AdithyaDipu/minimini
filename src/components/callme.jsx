@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 import './callme.css'
+import Navbar from './navbar';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAvl2v1enygI1jplM_denVHnwZLA3omV40",
@@ -41,6 +42,7 @@ const CallMe = () => {
             try {
                 const querySnapshot = await getDocs(q);
                 const cropData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                console.log("Fetched crop data:", cropData); // Log the fetched data
                 setCrops(cropData);
             } catch (err) {
                 setError(err.message);
@@ -60,14 +62,52 @@ const CallMe = () => {
     }
 
     return (
-        <div className="bg5 min-h-screen  p-8">
-            <h1 className="text-2xl font-bold mb-4 text-center">Crop Descriptions</h1>
+        <>
+        <Navbar/>
+        <div className="bg5 min-h-screen p-8">
+            <h1 className="text-2xl font-bold mb-4 text-center text-white">Crop Descriptions</h1>
             <ul className="space-y-4">
                 {crops.length > 0 ? (
                     crops.map((crop, index) => (
                         <li key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
-                            <h2 className="text-xl font-bold mb-2">{crop.cname || crop.error}</h2>
-                            {crop.desc && <p className="text-gray-700">{crop.desc}</p>}
+                            <h2 className="text-xl font-bold mb-2 bg-blue-300 rounded-lg text-center">{crop.cname || crop.error}</h2>
+                            {crop.weekI&& (
+                                <div className="mb-4">
+                                    <h3 className="font-semibold">Week 1</h3>
+                                    <p className="text-gray-700">{crop.weekI}</p>
+                                </div>
+                            )}
+                             {crop.weekIII&& (
+                                <div className="mb-4">
+                                    <h3 className="font-semibold">Week 3-4</h3>
+                                    <p className="text-gray-700">{crop.weekIII}</p>
+                                </div>
+                            )}
+                             {crop.weekV&& (
+                                <div className="mb-4">
+                                    <h3 className="font-semibold">Week 5-6</h3>
+                                    <p className="text-gray-700">{crop.weekV}</p>
+                                </div>
+                            )}
+                             {crop.weekVII&& (
+                                <div className="mb-4">
+                                    <h3 className="font-semibold">Week 7-8</h3>
+                                    <p className="text-gray-700">{crop.weekVII}</p>
+                                </div>
+                            )}
+                             {crop.weekIX&& (
+                                <div className="mb-4">
+                                    <h3 className="font-semibold">Week 9-10</h3>
+                                    <p className="text-gray-700">{crop.weekIX}</p>
+                                </div>
+                            )}
+                             {crop.weekXI&& (
+                                <div className="mb-4">
+                                    <h3 className="font-semibold">Week 11-12</h3>
+                                    <p className="text-gray-700">{crop.weekXI}</p>
+                                </div>
+                            )}
+                            {/* Add more weeks here if needed */}
                         </li>
                     ))
                 ) : (
@@ -75,6 +115,7 @@ const CallMe = () => {
                 )}
             </ul>
         </div>
+        </>
     );
 };
 
